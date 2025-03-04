@@ -14,8 +14,7 @@ export interface Register$Params {
       body: RegistrationRequest
 }
 
-export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
+export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{}>> {
   const rb = new RequestBuilder(rootUrl, register.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
@@ -26,8 +25,7 @@ export function register(http: HttpClient, rootUrl: string, params: Register$Par
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<{
-      }>;
+      return r as StrictHttpResponse<{}>;
     })
   );
 }

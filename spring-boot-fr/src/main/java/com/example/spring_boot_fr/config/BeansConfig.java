@@ -20,6 +20,8 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static org.springframework.http.HttpHeaders.*;
+
 /**
  * @author Dave AKN
  * @version 1.0
@@ -62,10 +64,10 @@ public class BeansConfig {
         config.setAllowCredentials(true);
         config.setAllowedOrigins(Collections.singletonList(this.frontendDevUrl));
         config.setAllowedHeaders(Arrays.asList(
-                HttpHeaders.ORIGIN,
-                HttpHeaders.CONTENT_TYPE,
-                HttpHeaders.ACCEPT,
-                HttpHeaders.AUTHORIZATION
+                ORIGIN,
+                CONTENT_TYPE,
+                ACCEPT,
+                AUTHORIZATION
         ));
         config.setAllowedMethods(Arrays.asList(
                 "GET",

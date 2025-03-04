@@ -1,5 +1,7 @@
 package com.example.spring_boot_fr.handler;
 
+import com.example.spring_boot_fr.exception.ActivationTokenException;
+import com.example.spring_boot_fr.exception.OperationNotPermittedException;
 import jakarta.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +80,17 @@ public class GlobalExceptionHandler {
                 );
     }
 
+    @ExceptionHandler(ActivationTokenException.class)
+    public ResponseEntity<ExceptionResponse> handleException(ActivationTokenException exp) {
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(
+                        ExceptionResponse.builder()
+                                .error(exp.getMessage())
+                                .build()
+                );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionResponse> handleException(MethodArgumentNotValidException exp) {
         Set<String> errors = new HashSet<>();
@@ -92,6 +105,17 @@ public class GlobalExceptionHandler {
                 .body(
                         ExceptionResponse.builder()
                                 .validationErrors(errors)
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(OperationNotPermittedException.class)
+    public ResponseEntity<ExceptionResponse> handleException(OperationNotPermittedException exp) {
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(
+                        ExceptionResponse.builder()
+                                .error(exp.getMessage())
                                 .build()
                 );
     }

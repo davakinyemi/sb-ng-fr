@@ -37,5 +37,8 @@ application:
     frontend:
       activation-url: http://localhost:4200/activate-account
   frontend-dev-url: http://localhost:4200
+  file:
+    upload:
+      output-path: ./uploads
 server:
   port: 8088

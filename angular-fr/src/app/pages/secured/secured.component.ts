@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {KeycloakService} from '../../services/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-secured',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './secured.component.css'
 })
 export class SecuredComponent {
+  constructor(private keycloakService: KeycloakService) {
+  }
 
+  async logout() {
+    await this.keycloakService.logout();
+  }
 }

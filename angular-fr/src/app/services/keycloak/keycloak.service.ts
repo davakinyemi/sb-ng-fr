@@ -20,6 +20,10 @@ export class KeycloakService {
     });
   }
 
+  get keycloak() {
+    return this._keycloak;
+  }
+
   get profile$(): Observable<AuthProfile> {
     return new Observable(subscriber => {
       if (this._profile) {

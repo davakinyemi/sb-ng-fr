@@ -1,9 +1,78 @@
 import { Injectable } from '@angular/core';
+import Keycloak from 'keycloak-js';
+import {AuthProfile} from './auth-profile';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KeycloakService {
 
-  constructor() { }
+  private _keycloak: Keycloak;
+  private _profile: AuthProfile | undefined;
+  private _token: string | undefined;
+
+  constructor() {
+    this._keycloak = new Keycloak({
+      url: 'http://localhost:9090',
+      realm: 'sb-ng-fr',
+      clientId: 'sbngfr'
+    });
+  }
+
+  get profile$(): Observable<AuthProfile> {
+    return new Observable(subscriber => {
+      if (this._profile) {
+        subscriber.next(this._profile);
+      } else {
+        this._keycloak.loadUserProfile().then(profile => {
+          this._profile = { ...profile, token: this._keycloak.token };
+          subscriber.next(this._profile);
+        });
+      }
+    });
+  }
+
+  async init() {
+    console.log("Authenticating...")
+    try {
+      const authenticated = await this._keycloak.init({
+        onLoad: 'login-required',
+        checkLoginIframe: false
+      });
+
+      if (authenticated) {
+        console.log("Authenticated...");
+        this._profile = (await this._keycloak.loadUserProfile()) as AuthProfile;
+        this._token = this._keycloak.token;
+      }
+      return authenticated;
+    } catch (error) {
+      console.error("Keycloak init failed: ", error);
+      return false;
+    }
+  }
+
+  async refreshToken() {
+    try {
+      const refreshed = await this._keycloak.updateToken(30);
+      if (refreshed) {
+        this._token = this._keycloak.token;
+      }
+      return refreshed;
+    } catch (error) {
+      console.error("Token refresh failed: ", error);
+      return false;
+    }
+  }
+
+  login() {
+    return this._keycloak.login();
+  }
+
+  logout() {
+    return this._keycloak.logout({
+      redirectUri: 'http://localhost:4200'
+    });
+  }
 }

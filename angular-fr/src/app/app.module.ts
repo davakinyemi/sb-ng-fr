@@ -7,11 +7,13 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import { ActivateComponent } from './pages/activate/activate.component';
 import {CodeInputModule} from 'angular-code-input';
 import {httpTokenInterceptor} from './services/interceptor/http-token.interceptor';
+import { SecuredComponent } from './pages/secured/secured.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ActivateComponent
+    ActivateComponent,
+    SecuredComponent
   ],
   imports: [
     BrowserModule,

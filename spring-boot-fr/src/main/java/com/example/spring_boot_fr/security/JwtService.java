@@ -19,7 +19,7 @@ import java.util.function.Function;
  * @author Dave AKN
  * @version 1.0
  */
-@Service
+// @Service
 public class JwtService {
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;

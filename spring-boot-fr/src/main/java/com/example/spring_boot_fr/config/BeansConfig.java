@@ -29,28 +29,29 @@ import static org.springframework.http.HttpHeaders.*;
 @Configuration
 @RequiredArgsConstructor
 public class BeansConfig {
-    private final UserDetailsService userDetailsService;
+
+    // private final UserDetailsService userDetailsService;
 
     @Value("${application.frontend-dev-url}")
     private String frontendDevUrl;
 
-    @Bean
+    /* @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(this.passwordEncoder());
         return authProvider;
-    }
+    } */
 
-    @Bean
+    /* @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
-    }
+    } */
 
-    @Bean
+    /* @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    } */
 
     @Bean
     public AuditorAware<Integer> auditorAware() {

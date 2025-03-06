@@ -14,8 +14,8 @@ import static org.springframework.http.ResponseEntity.ok;
  * @author Dave AKN
  * @version 1.0
  */
-@RestController
-@RequestMapping("auth")
+// @RestController
+// @RequestMapping("auth")
 @RequiredArgsConstructor
 @Tag(name = "Authentication")
 public class AuthenticationController {

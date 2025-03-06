@@ -24,8 +24,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private final JwtFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
+    // private final JwtFilter jwtAuthFilter;
+    // private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -49,9 +49,12 @@ public class SecurityConfig {
                                         ).permitAll()
                                         .anyRequest()
                                         .authenticated()
-                ).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                )
+                .oauth2ResourceServer(auth ->
+                        auth.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
+                /*.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(this.authenticationProvider)
-                .addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);*/
 
         return http.build();
     }

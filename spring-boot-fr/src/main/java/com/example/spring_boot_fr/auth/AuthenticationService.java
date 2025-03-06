@@ -31,7 +31,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
  * @author Dave AKN
  * @version 1.0
  */
-@Service
+// @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final RoleRepository roleRepository;

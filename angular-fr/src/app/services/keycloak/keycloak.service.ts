@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class KeycloakService {
 
-  private _keycloak: Keycloak;
+  private readonly _keycloak: Keycloak;
   private _profile: AuthProfile | undefined;
   private _token: string | undefined;
 
@@ -31,7 +31,9 @@ export class KeycloakService {
       } else {
         this._keycloak.loadUserProfile().then(profile => {
           this._profile = { ...profile, token: this._keycloak.token };
-          subscriber.next(this._profile);
+          if (this._profile) {
+            subscriber.next(this._profile);
+          }
         });
       }
     });

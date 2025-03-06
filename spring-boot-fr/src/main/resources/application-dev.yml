@@ -28,14 +28,12 @@ spring:
         connectiontimeout: 5000
         timeout: 3000
         writetimeout: 5000
-application:
   security:
-    jwt:
-      secret-key: 04e614dc57e90596252ab9bcf3e436e190d9ab0bf9dc43358f8a739c0671cfcd
-      expiration: 8640000
-  mailing:
-    frontend:
-      activation-url: http://localhost:4200/activate-account
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:9090/realms/sb-ng-fr"
+application:
   frontend-dev-url: http://localhost:4200
   file:
     upload:

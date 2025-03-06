@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Dave AKN
  * @version 1.0
  */
-@Service
+// @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 

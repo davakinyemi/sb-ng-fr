@@ -19,6 +19,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequiredArgsConstructor
 @Tag(name = "Authentication")
 public class AuthenticationController {
+    /*
     private final AuthenticationService authService;
 
     @PostMapping("/register")
@@ -43,4 +44,5 @@ public class AuthenticationController {
     ) throws MessagingException {
         this.authService.activateAccount(token);
     }
+     */
 }

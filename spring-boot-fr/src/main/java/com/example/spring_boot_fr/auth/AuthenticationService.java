@@ -34,6 +34,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 // @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+    /*
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
@@ -146,4 +147,5 @@ public class AuthenticationService {
         savedToken.setValidatedAt(LocalDateTime.now());
         this.tokenRepository.save(savedToken);
     }
+    */
 }

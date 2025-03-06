@@ -81,4 +81,8 @@ export class KeycloakService {
       redirectUri: 'http://localhost:4200'
     });
   }
+
+  manageAccount() {
+    return this._keycloak.accountManagement();
+  }
 }

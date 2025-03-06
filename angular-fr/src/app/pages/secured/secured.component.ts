@@ -14,4 +14,8 @@ export class SecuredComponent {
   async logout() {
     await this.keycloakService.logout();
   }
+
+  async manageAccount() {
+    await this.keycloakService.manageAccount();
+  }
 }

@@ -19,6 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.springframework.http.HttpHeaders.*;
 
@@ -32,8 +33,8 @@ public class BeansConfig {
 
     // private final UserDetailsService userDetailsService;
 
-    @Value("${application.frontend-dev-url}")
-    private String frontendDevUrl;
+    @Value("${application.cors.origins:*}")  // not recommended for security
+    private List<String> allowedOrigins;
 
     /* @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -62,21 +63,10 @@ public class BeansConfig {
     public CorsFilter corsfilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList(this.frontendDevUrl));
-        config.setAllowedHeaders(Arrays.asList(
-                ORIGIN,
-                CONTENT_TYPE,
-                ACCEPT,
-                AUTHORIZATION
-        ));
-        config.setAllowedMethods(Arrays.asList(
-                "GET",
-                "POST",
-                "DELETE",
-                "PUT",
-                "PATCH"
-        ));
+        // config.setAllowCredentials(true);
+        config.setAllowedOrigins(this.allowedOrigins);
+        config.setAllowedHeaders(Arrays.asList("*")); // not recommended for security
+        config.setAllowedMethods(Arrays.asList("*"));  // not recommended for security
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

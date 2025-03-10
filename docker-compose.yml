@@ -34,13 +34,23 @@ services:
       - "start-dev"
   sbngfr-api:
     container_name: sbngfr-api
-    image: sbngfr/sbngfr:1.0.0
+    image: sbngfr/sbngfr:1.0.2
     ports:
       - 8088:8088
     networks:
       - spring-demo
     depends_on:
       - postgres
+
+  sbngfr-ui:
+    container_name: sbngfr-ui
+    image: sbngfr/sbngfr-ui:1.0.0
+    ports:
+      - 8080:80
+    networks:
+      - spring-demo
+    depends_on:
+      - sbngfr-api
 
 networks:
   spring-demo:
